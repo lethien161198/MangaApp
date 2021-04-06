@@ -1,0 +1,38 @@
+<resources>
+    <string name="app_name">MangaApp</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="manga">Manga</string>
+    <string name="reading">Reading</string>
+    <string name="updates">Updates</string>
+    <string name="latest">Latest</string>
+    <string name="popular">Popular</string>
+    <string name="description">Description</string>
+    <string name="chapter">Chapter</string>
+    <string name="rating">Rating</string>
+    <string name="alternative">Alternative</string>
+    <string name="status">Status</string>
+    <string name="genre_s">Genre(s)</string>
+    <string name="artist_s">Artist(s)</string>
+    <string name="author_s">Author(s)</string>
+    <string name="title">Title</string>
+    <string name="author_artist">Author/Artist</string>
+    <string name="statuss">Status</string>
+    <string name="genre">Genre</string>
+    <string name="release">Release</string>
+    <string name="search">Search</string>
+    <string name="create">Create</string>
+    <string name="update1">Update</string>
+    <string name="a_z">A-Z</string>
+    <string name="result">Result</string>
+    <string name="favourite">Favourite</string>
+    <string name="recent">Recent</string>
+    <string name="choose">Choose Page</string>
+    <string name="title_activity_splash_screen">SplashScreenActivity</string>
+    <!--
+    This string is used for square devices and overridden by hello_world in
+    values-round/strings.xml for round devices.
+    -->
+    <string name="hello_world">Hello Square World!</string>
+    <string name="mangapark">MANGAPARK</string>
+</resources>
