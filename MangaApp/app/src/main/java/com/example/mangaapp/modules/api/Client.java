@@ -83,7 +83,6 @@ public class Client {
 
                 }
                 int page1 = elementPage.size();
-                Log.d("1234", "totalPage: " + page1);
                 Result result = new Result(mangaList, page1);
                 emitter.onNext(result);
             } catch (IOException e) {
@@ -142,7 +141,6 @@ public class Client {
                 manga.setUrl(url);
                 manga.setUrlChapter(urlChapter);
                 mangaList.add(manga);
-                Log.d("123", "getPopularManga: "+ manga.getUrl());
             }
             emitter.onNext(mangaList);
         });
@@ -231,33 +229,51 @@ public class Client {
 
                 HashMap<Version, List<Chapter>> listMap = new HashMap<>();
 
-                if (doc.getElementById("stream_4") != null) {
-                    List<Chapter> listChapter1 = new ArrayList<>();
-                    Elements elementVersion1 = doc.getElementById("stream_4").children();
-                    Version version1 = new Version(1, elementVersion1.eq(0).select("span").text());
-                    Elements elementsChapter1 = elementVersion1.eq(1).select("li");
-                    int size1 = elementsChapter1.size();
-                    for (int i = 0; i < size1; i++) {
-                        String nameChapter = elementsChapter1.select("a.visited").eq(i).text();
-                        String urlchapter = elementsChapter1.select("a.visited").eq(i).attr("href");
-                        listChapter1.add(new Chapter(nameChapter, urlchapter));
+                Elements elementVersion = doc.getElementById("list").children();
+
+                for (int i = 0; i < elementVersion.size(); i++) {
+                    List<Chapter> listChapter = new ArrayList<>();
+                    Elements elementV = elementVersion.eq(i).select("div").select("a").select("span").eq(0);
+                    Elements elementC = elementVersion.eq(i).select("ul.chapter").select("li");
+                    String versionName = elementV.text();
+                    Version version = new Version(1,versionName);
+                    int size1 = elementC.size();
+
+                    for (int j = 0; j < size1; j++) {
+                        String nameChapter = elementC.select("a.visited").eq(j).text();
+                        String urlchapter = elementC.select("a.visited").eq(j).attr("href");
+                        listChapter.add(new Chapter(nameChapter, urlchapter));
                     }
-                    listMap.put(version1, listChapter1);
+                    listMap.put(version, listChapter);
                 }
 
-                if (doc.getElementById("stream_1") != null) {
-                    Elements elementVersion2 = doc.getElementById("stream_1").children();
-                    Version version2 = new Version(2, elementVersion2.eq(0).select("span").text());
-                    Elements elementsChapter2 = elementVersion2.eq(1).select("li");
-                    int size2 = elementsChapter2.size();
-                    List<Chapter> listChapter2 = new ArrayList<>();
-                    for (int i = 0; i < size2; i++) {
-                        String nameChapter = elementsChapter2.select("a.visited").eq(i).text();
-                        String urlchapter = elementsChapter2.select("a.visited").eq(i).attr("href");
-                        listChapter2.add(new Chapter(nameChapter, urlchapter));
-                    }
-                    listMap.put(version2, listChapter2);
-                }
+//                if (doc.getElementById("stream_4") != null) {
+//                    List<Chapter> listChapter1 = new ArrayList<>();
+//                    Elements elementVersion1 = doc.getElementById("stream_4").children();
+//                    Version version1 = new Version(1, elementVersion1.eq(0).select("span").text());
+//                    Elements elementsChapter1 = elementVersion1.eq(1).select("li");
+//                    int size1 = elementsChapter1.size();
+//                    for (int i = 0; i < size1; i++) {
+//                        String nameChapter = elementsChapter1.select("a.visited").eq(i).text();
+//                        String urlchapter = elementsChapter1.select("a.visited").eq(i).attr("href");
+//                        listChapter1.add(new Chapter(nameChapter, urlchapter));
+//                    }
+//                    listMap.put(version1, listChapter1);
+//                }
+//
+//                if (doc.getElementById("stream_1") != null) {
+//                    Elements elementVersion2 = doc.getElementById("stream_1").children();
+//                    Version version2 = new Version(2, elementVersion2.eq(0).select("span").text());
+//                    Elements elementsChapter2 = elementVersion2.eq(1).select("li");
+//                    int size2 = elementsChapter2.size();
+//                    List<Chapter> listChapter2 = new ArrayList<>();
+//                    for (int i = 0; i < size2; i++) {
+//                        String nameChapter = elementsChapter2.select("a.visited").eq(i).text();
+//                        String urlchapter = elementsChapter2.select("a.visited").eq(i).attr("href");
+//                        listChapter2.add(new Chapter(nameChapter, urlchapter));
+//                    }
+//                    listMap.put(version2, listChapter2);
+//                }
 
                 mangaDetail.setListMap(listMap);
                 mangaDetail.setName(name);
@@ -279,7 +295,6 @@ public class Client {
 
             String newUrl = String.valueOf(newlist);
 
-            Log.d("1234", "subscribe: " + Utilities.baseUrl + newUrl);
             Document doc = Jsoup.connect(Utilities.baseUrl + newUrl).userAgent("Chrome").get();
             List<Read> listRead = new ArrayList<>();
 
@@ -287,7 +302,6 @@ public class Client {
 
             String text = elements.toString().split("\\s")[5];
             String json = text.split(";")[0];
-            Log.d("1234", "json: " + json);
 
 
             Gson gson = new Gson();
@@ -297,8 +311,6 @@ public class Client {
 
             listRead = gson.fromJson(json, type);
 
-
-            Log.d("1234", "array: " + listRead.size());
 
             emitter.onNext(listRead);
         });
@@ -312,13 +324,12 @@ public class Client {
                 Document doc = null;
                 try {
                     doc = Jsoup.connect(Utilities.baseUrl + Utilities.URL_RESULT + url).userAgent("Chrome").get();
-                    Log.d("1234", "url: " + Utilities.baseUrl + Utilities.URL_RESULT + url);
 
                     Elements elements = doc.getElementsByClass("manga-list").first().children();
 
                     int size = elements.size();
 
-                    for (int i = 1; i < size - 2; i++) {
+                    for (int i = 0; i < size - 2; i++) {
 
                         String title = elements.select("a.cover")
                                 .eq(i)
@@ -339,8 +350,6 @@ public class Client {
                         String rating = elements.select("div.rate").select("i")
                                 .eq(i)
                                 .text();
-                        Log.d("123", "rate: " + rating);
-
 
                         Manga manga = new Manga(title, img, chapter);
                         manga.setUrl(url);
@@ -350,7 +359,6 @@ public class Client {
 
                     }
                     int page = elements.select("ul.pager").select("select").select("option").size();
-                    Log.d("1234", "totalPage: " + page);
                     Result result = new Result(mangaList, page);
                     emitter.onNext(result);
                 } catch (IOException e) {
@@ -369,7 +377,6 @@ public class Client {
                     doc = Jsoup.connect(Utilities.baseUrl + Utilities.URL_SEARCH).userAgent("Chrome").get();
                     List<Genre> list = new ArrayList<>();
                     Elements elements = doc.getElementsByClass("genres opt-item triploid").first().children();
-                    Log.d("123", "subscribe: " + elements.size());
                     for (int i = 0; i < elements.size(); i++) {
                         String genre = elements.select("li").select("span").eq(i).text();
                         list.add(new Genre(genre, false));

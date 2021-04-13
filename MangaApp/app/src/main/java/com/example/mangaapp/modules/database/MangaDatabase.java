@@ -13,7 +13,7 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteOpenHelper;
 
-@Database(entities = {Manga.class, Recent.class},version = 1)
+@Database(entities = {Manga.class, Recent.class},version = 1,exportSchema = false)
 public abstract class MangaDatabase extends RoomDatabase {
 
     private static final String DATABASE_NAME = "manga.db";

@@ -73,8 +73,8 @@ public class UpdatesFragment extends FragmentView<UpdateContract.Presenter, Frag
         mangaAdapter = new MangaAdapter(list, getContext(), new MangaAdapter.OnClickItem() {
             @Override
             public void sendUrl(String url) {
-                Log.d("123", "sendUrl: Update " + url);
-                showToast(url);
+
+                showToast(Utilities.WAITING);
                 Bundle bundle = new Bundle();
                 bundle.putString(Utilities.KEY_URL_DETAIL, url);
                 navigate(AppNavigator.ROUTE_DETAIL, bundle);
@@ -99,11 +99,10 @@ public class UpdatesFragment extends FragmentView<UpdateContract.Presenter, Frag
                 boolean check = MangaDatabase.getInstance().recentDAO().isRecordExistsUserId(recent.getUrl());
                 if (check) {
                     MangaDatabase.getInstance().recentDAO().deleteRecent(recent);
-                    Log.d("1234", "delete + saveRecent: " + MangaDatabase.getInstance().recentDAO().getAll().size());
+
                 }
 
                 MangaDatabase.getInstance().recentDAO().insertRecent(recent);
-                Log.d("1234", "saveRecent: " + MangaDatabase.getInstance().recentDAO().getAll().size());
 
                 EventBus.getDefault().postSticky("recent");
             }

@@ -49,8 +49,6 @@ public class ChapterFragment extends FragmentView<ChapterContract.Presenter, Fra
 
     }
 
-
-
     @Override
     public void loadListChapter(HashMap<Version, List<Chapter>> listMap) {
         versionList = new ArrayList<>(listMap.keySet());
@@ -82,7 +80,6 @@ public class ChapterFragment extends FragmentView<ChapterContract.Presenter, Fra
                     listItem.measure(desiredWidth, View.MeasureSpec.UNSPECIFIED);
 
                     totalHeight += listItem.getMeasuredHeight();
-
                 }
             }
         }

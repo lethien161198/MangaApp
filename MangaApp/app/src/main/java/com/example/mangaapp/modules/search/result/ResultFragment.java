@@ -40,7 +40,7 @@ public class ResultFragment extends FragmentView<ResultContract.Presenter, Fragm
 
     @Override
     protected void init() {
-        CustomProgress.FadingCircle(getBinding().progressCircular);
+        CustomProgress.Wave(getBinding().progressCircular);
         showProgress();
         showBottomBar(false);showBottomBar(false);
         getBinding().headertitle.title.setText(R.string.result);
@@ -55,14 +55,12 @@ public class ResultFragment extends FragmentView<ResultContract.Presenter, Fragm
         getPresenter().getResult(1,sort);
         getBinding().radioGroup.setOnCheckedChangeListener((group, checkedId) -> {
             if (checkedId == getBinding().radio1.getId()) {
-//                resultAdapter.sortAz();
-//                setResultAdapter(resultAdapter);
+
                 sort = "a-z";
                 getPresenter().getResult(1,sort);
             }
             if (checkedId == getBinding().radio2.getId()) {
-//                resultAdapter.sortRating();
-//                setResultAdapter(resultAdapter);
+
                 sort = "rating";
                 getPresenter().getResult(1,sort);
             }
@@ -89,7 +87,7 @@ public class ResultFragment extends FragmentView<ResultContract.Presenter, Fragm
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
                 currentPage=Integer.parseInt(spinnerAdapter.getItem(position));
-                showToast(currentPage+"");
+                //showToast(currentPage+"");
 
             }
 
@@ -116,7 +114,7 @@ public class ResultFragment extends FragmentView<ResultContract.Presenter, Fragm
         resultAdapter = new ResultAdapter(list, getContext(), new ResultAdapter.OnClickItem() {
             @Override
             public void sendUrl(String url) {
-                showToast(url);
+                showToast(Utilities.WAITING);
                 Bundle bundle = new Bundle();
                 bundle.putString(Utilities.KEY_URL_DETAIL, url);
                 navigate(AppNavigator.ROUTE_DETAIL, bundle);

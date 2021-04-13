@@ -118,11 +118,16 @@
             app:layout_constraintTop_toTopOf="@id/txtRelease"
             app:layout_constraintBottom_toBottomOf="@id/txtRelease"
             />
+        <ProgressBar
+            app:layout_constraintTop_toTopOf="@id/genreRecycler"
+            app:layout_constraintBottom_toBottomOf="@id/genreRecycler"
+            app:layout_constraintRight_toRightOf="@id/genreRecycler"
+            app:layout_constraintLeft_toLeftOf="@id/genreRecycler"
+            android:id="@+id/progress_circular"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
-    <ProgressBar
-        android:id="@+id/progress_circular"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_gravity="center"/>
+
 
 </FrameLayout>

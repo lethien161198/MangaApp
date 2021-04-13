@@ -84,7 +84,7 @@ public class RecentFragment extends FragmentView<RecentContract.Presenter, Fragm
         recentAdapter = new RecentAdapter(list, getContext(), new RecentAdapter.OnClickItem() {
             @Override
             public void sendUrl(String url) {
-                showToast(url);
+                showToast(Utilities.WAITING);
                 Bundle bundle = new Bundle();
                 bundle.putString(Utilities.KEY_URL_DETAIL, url);
                 navigate(AppNavigator.ROUTE_DETAIL, bundle);

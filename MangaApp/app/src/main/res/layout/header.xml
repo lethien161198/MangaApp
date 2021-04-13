@@ -22,6 +22,7 @@
         android:textSize="20sp"
         android:gravity="center"
         android:maxLines="2"
+        android:ellipsize="end"
         app:layout_constraintLeft_toLeftOf="@id/iconLeft"
         app:layout_constraintRight_toRightOf="@id/iconRight"
         />

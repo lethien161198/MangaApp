@@ -94,7 +94,7 @@ public class FavouriteFragment extends FragmentView<FavouriteContract.Presenter,
         mangaAdapter = new MangaAdapter(list, getContext(), new MangaAdapter.OnClickItem() {
             @Override
             public void sendUrl(String url) {
-                showToast(url);
+                showToast(Utilities.WAITING);
                 Bundle bundle = new Bundle();
                 bundle.putString(Utilities.KEY_URL_DETAIL, url);
                 navigate(AppNavigator.ROUTE_DETAIL, bundle);

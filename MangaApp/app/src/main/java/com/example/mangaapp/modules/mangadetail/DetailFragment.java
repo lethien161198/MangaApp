@@ -90,7 +90,6 @@ public class DetailFragment extends FragmentView<DetailContract.Presenter, Fragm
         Bundle sendChapter = new Bundle();
 
         sendChapter.putSerializable(Utilities.KEY_MAP_CHAPTER, mangaDetail.getListMap());
-        Log.d("abcxyz", "loadInfo: " +  sendChapter.getSerializable(Utilities.KEY_MAP_CHAPTER).toString());
         viewPagerAdapter.addFragment((Fragment) AppNavigator.viewWithRoute(AppNavigator.ROUTE_CHAPTER,sendChapter));
 
         viewPager2.setAdapter(viewPagerAdapter);

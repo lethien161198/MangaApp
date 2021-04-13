@@ -38,7 +38,7 @@ public class SearchFragment extends FragmentView<SearchContract.Presenter, Fragm
     @Override
     protected void init() {
 
-        CustomProgress.FadingCircle(getBinding().progressCircular);
+        CustomProgress.Wave(getBinding().progressCircular);
         showProgress();
         showBottomBar(false);
         getBinding().headertitle.title.setText(R.string.search);

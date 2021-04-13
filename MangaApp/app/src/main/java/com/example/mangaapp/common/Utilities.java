@@ -31,13 +31,16 @@ public class Utilities {
     public static final String URL_RESULT = "search?";
     public static final String SEARCH_REQUEST = "search_request";
     public static final String KEY_URL_CHAPTER = "url_chapter";
+    public static final String WAITING = "WAITING . . .";
+
     public static void loadImage(Context context, String url, ImageView img) {
         Glide.with(context)
                 .load(url)
-                .error(R.drawable.ic_launcher_background)
+                .error(R.drawable.noimage)
                 .override(Target.SIZE_ORIGINAL)
                 .into(img);
     }
+
     public static void loadImage(Context context, String url, PhotoView img) {
         Glide.with(context)
                 .asBitmap()
@@ -45,7 +48,7 @@ public class Utilities {
                 .into(new CustomTarget<Bitmap>() {
                     @Override
                     public void onResourceReady(Bitmap bitmap, Transition<? super Bitmap> transition) {
-                        Bitmap scaleWidth = BitmapScaler.scaleToFitWidth(bitmap,1080);
+                        Bitmap scaleWidth = BitmapScaler.scaleToFitWidth(bitmap, 1080);
                         img.setImageBitmap(scaleWidth);
                     }
 

@@ -23,7 +23,7 @@ public class SplashScreenActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
         progressBar = findViewById(R.id.progress_circular);
-        CustomProgress.FadingCircle(progressBar);
+        CustomProgress.Wave(progressBar);
         progressBar.setVisibility(View.VISIBLE);
         Timer timer = new Timer();
         boolean checkConnection = Utilities.checkConnection(this);
